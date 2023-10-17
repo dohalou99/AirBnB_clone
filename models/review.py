@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-#<doha> and <youssef>
-""" Class Review """
+"""
+review class
+"""
 from models.base_model import BaseModel
 
+
 class Review(BaseModel):
-    """[Review class]"""
+    """review class"""
     place_id = ""
     user_id = ""
     text = ""

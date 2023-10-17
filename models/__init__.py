@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-#<doha> nd <youssef>
-"""Importing FileStorage class"""
-
+""" Import modules and packages """
 from models.engine.file_storage import FileStorage
 
 storage = FileStorage()

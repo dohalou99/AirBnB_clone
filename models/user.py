@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-#<doha> and <youssef>
-""" User Class """
+"""
+User class
+"""
 from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    """
-    [User class]inherits from BaseModel
-    """
+    """user creation"""
     email = ""
     password = ""
     first_name = ""

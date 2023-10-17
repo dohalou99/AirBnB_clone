@@ -1,41 +1,48 @@
 #!/usr/bin/python3
-"""[Module that contains the FileStorage class]"""
+"""
+class for serializion of instances to a JSON file
+and the deserializion of JSON file to instances:
+"""
 import json
-import uuid
 import os
 
+
 class FileStorage:
-    """ construct """
+
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """ return dictionary objects """
         return FileStorage.__objects
 
     def new(self, obj):
-        """ sets in dictionary the obj with key <obj class name>.id """
-        FileStorage.__objects[obj.__class__.__name__ + "." + str(obj.id)] = obj
+        k = obj.__class__.__name__ + "." + obj.id
+        FileStorage.__objects[k] = obj
 
     def save(self):
-        """ serializes objectss to the JSON file (path: __file_path) """
-        with open(FileStorage.__file_path, 'w', encoding='utf-8') as fname:
-            new_dict = {key: obj.to_dict() for key, obj in
-                        FileStorage.__objects.items()}
-            json.dump(new_dict, fname)
-from datetime import datetime
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
- def reload(self):
-        """ Reload the file """
-        if (os.path.isfile(FileStorage.__file_path)):
-            with open(FileStorage.__file_path, 'r', encoding="utf-8") as fname:
-                l_json = json.load(fname)
-                for key, val in l_json.items():
-                    FileStorage.__objects[key] = eval(
-                        val['__class__'])(**val)
+        """ Serializes __objects to the JSON file """
+        dct = {}
+        for k, v in FileStorage.__objects.items():
+            dct[k] = v.to_dict()
+
+        with open(FileStorage.__file_path, 'w') as fl:
+            json.dump(dct, fl)
+
+    def reload(self):
+        """ Deserializes __objects from the JSON file """
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.city import City
+        from models.amenity import Amenity
+        from models.state import State
+        from models.review import Review
+        dct = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'City': City,
+               'Amenity': Amenity,
+               'State': State,
+               'Review': Review}
+        if os.path.exists(FileStorage.__file_path) is True:
+            with open(FileStorage.__file_path, 'r') as fl:
+                for k, v in json.load(fl).items():
+                    self.new(dct[v['__class__']](**v))

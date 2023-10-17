@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-#<doha> and <youssef>
-""" Class City """
+"""
+city class
+"""
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """class city inheriting from BaseModel
-    """
-
+    """city that you looking for it"""
     state_id = ""
     name = ""

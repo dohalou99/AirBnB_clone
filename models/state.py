@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-#<doha> and <youssef>
-""" Class State """
+"""
+Class state
+"""
 from models.base_model import BaseModel
 
+
 class State(BaseModel):
-    """[State class]
-    inherits from BaseModel
-    """
+    """to create the state"""
     name = ""

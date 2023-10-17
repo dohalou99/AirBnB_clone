@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-#<doha> and <youssef>
-""" Class Amenity """
+"""
+Defines amenities
+"""
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """[Amenity class]
-    inherits from BaseModel"""
+    """Defines amenities that user can choose from to offer at its place"""
     name = ""
